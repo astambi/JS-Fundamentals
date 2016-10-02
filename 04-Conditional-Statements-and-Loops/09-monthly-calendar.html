@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Calendar</title>
+    <style>
+        .prev-month, .next-month { color: #CCC }
+        .today { font-weight: bold; background: #DDD; }
+        .title { background: #AAAAFF; margin: 10px 0; padding:5px }
+        table { border: 1px solid #CCC;}
+        td { text-align: center; }
+        #calendarCode { width: 100%; }
+    </style>
+
+    <script>
+        function calendar(input) {
+            let [day, month, year] = input.map(Number);
+            // calc days
+            let firstDateCurrMonth = new Date(year, month - 1, 1); // months [0, 11]
+            let prevMonthDays = firstDateCurrMonth.getDay();
+            let lastDayPrevMonth = lastDayInMonth(month - 1, year);
+            let lastDayCurrentMonth = lastDayInMonth(month, year);
+            let lastDateDayOfWeek = (new Date(year, month - 1, lastDayCurrentMonth)).getDay();
+            let nextMonthDays = 6 - lastDateDayOfWeek;
+            // table header
+            let calendar = "<table>\n" + "<tr>" + "<th>Sun</th>" + "<th>Mon</th>" + "<th>Tue</th>"
+                    + "<th>Wed</th>" + "<th>Thu</th>" + "<th>Fri</th>" + "<th>Sat</th>" + "</tr>\n";
+            // previous month
+            calendar += "<tr>";
+            for (let i = prevMonthDays; i > 0; i--)
+                calendar += `<td class="prev-month">${lastDayPrevMonth - i + 1}</td>`;
+            // current month: incomplete week following prev month
+            let currentDay = 0;
+            for (let i = 1; i <= 7 - prevMonthDays; i++)
+                addDayToCalendar();
+            calendar += "</tr>\n";
+            // current month: full weeks
+            let countFullWeeks = Math.floor((lastDayCurrentMonth - currentDay) / 7);
+            for (let j = 0; j < countFullWeeks; j++) {
+                calendar += "<tr>";
+                for (let i = 0; i < 7; i++)
+                    addDayToCalendar();
+                calendar += "</tr>\n";
+            }
+            // current month: incomplete week + next month
+            if (currentDay < lastDayCurrentMonth) {
+                calendar += "<tr>";
+                for (let i = currentDay; i < lastDayCurrentMonth; i++ )
+                    addDayToCalendar();
+                for (let i = 1; i <= nextMonthDays; i++)
+                    calendar += `<td class="next-month">${i}</td>`;
+                calendar += "</tr>\n";
+            }
+            // close table
+            calendar += "</table>\n";
+            return calendar;
+
+            function addDayToCalendar() {
+                if (++currentDay == day)
+                    return calendar += `<td class="today">${currentDay}</td>`;
+                else
+                    return calendar += `<td>${currentDay}</td>`;
+            }
+
+            function  lastDayInMonth(month, year) {
+                if (month == 0) month = 12; // [1, 12]
+                switch (month) {
+                    case 2:
+                        let isLeapYear = (year % 400 == 0 )
+                                || (year % 4 == 0 && year % 100 != 0);
+                        if (isLeapYear) return 29;
+                        return 28;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11: return 30;
+                    default: return 31;
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+Day: <input id="day" type="number" value="4" />
+Month: <input id="month" type="number" value="9" />
+Year: <input id="year" type="number" value="2016" />
+<input type="button" value="Show"
+       onclick="let calendarHTML =
+            calendar([document.getElementById('day').value,
+            document.getElementById('month').value,
+            document.getElementById('year').value]);
+            document.getElementById('calendar').innerHTML = calendarHTML;
+            document.getElementById('calendarCode').innerText = calendarHTML" />
+<div class="title">Calendar:</div>
+<div id="calendar">Calendar will be shown here</div>
+<div class="title">HTML:</div>
+<textarea rows="12" id="calendarCode"></textarea>
+</body>
+
+</html>
