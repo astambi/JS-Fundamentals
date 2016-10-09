@@ -111,6 +111,9 @@ function sets() {
     names.add("Maria"); // Duplicates are skipped
     names.delete(20); // Delete element if exists
 
+    console.log(names.size);
+    console.log([...names].length);
+
     for (let name of names)
         console.log(name);
     console.log([...names].join(', '));
