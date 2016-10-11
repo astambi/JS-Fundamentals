@@ -27,11 +27,9 @@ function angularParser(input) {
                 appObj = angularElements.get(app);
                 appObj.controllers.add(controller);
                 angularElements.set(app, appObj);
-            } else if (tempElements.has(app)) {
-                appObj = tempElements.get(app);
-                appObj.controllers.add(controller);
-                tempElements.set(app, appObj);
             } else {
+                if (tempElements.has(app))
+                    appObj = tempElements.get(app);
                 appObj.controllers.add(controller);
                 tempElements.set(app, appObj);
             }
@@ -41,11 +39,9 @@ function angularParser(input) {
                 appObj = angularElements.get(app);
                 appObj.models.add(model);
                 angularElements.set(app, appObj);
-            } else if (tempElements.has(app)) {
-                appObj = tempElements.get(app);
-                appObj.models.add(model);
-                tempElements.set(app, appObj);
             } else {
+                if (tempElements.has(app))
+                    appObj = tempElements.get(app);
                 appObj.models.add(model);
                 tempElements.set(app, appObj);
             }
@@ -55,17 +51,15 @@ function angularParser(input) {
                 appObj = angularElements.get(app);
                 appObj.views.add(view);
                 angularElements.set(app, appObj);
-            } else if (tempElements.has(app)) {
-                appObj = tempElements.get(app);
-                appObj.views.add(view);
-                tempElements.set(app, appObj);
             } else {
+                if (tempElements.has(app))
+                    appObj = tempElements.get(app);
                 appObj.views.add(view);
                 tempElements.set(app, appObj);
             }
         }
     }
-    // sort apps & MVC elements
+    // sort apps
     let sortedApps = [...angularElements.keys()].sort(function (a, b) {
         let controllersA = angularElements.get(a).controllers.size;
         let controllersB = angularElements.get(b).controllers.size;
