@@ -124,3 +124,16 @@ objects();
 assocArrays();
 maps();
 sets();
+
+let map = new Map();
+map.set('wagner', 10);
+map.set('anna', 100);
+map.set('richard wagner', 100);
+function compare(a, b) {
+    let result = b[1] - a[1];
+    if (result == 0)
+        result = a[0].localeCompare(b[0]);
+    return result;
+}
+let sortedMap = [...map].sort(compare);
+console.log(sortedMap);
