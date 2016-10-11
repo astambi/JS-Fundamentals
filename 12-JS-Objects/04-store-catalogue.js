@@ -2,11 +2,10 @@ function storeCatalogue(arr) {
     let catalogue = new Map();
     for (let line of arr) {
         let [product, price] = line.split(/\s*:\s*/);
-        price = Number(price);
         let catalogueLetter = product.toUpperCase()[0];
         if (!catalogue.has(catalogueLetter))
             catalogue.set(catalogueLetter, new Map);
-        catalogue.get(catalogueLetter).set(product, price);
+        catalogue.get(catalogueLetter).set(product, Number(price));
     }
     let keys = Array.from(catalogue.keys()).sort(); // cat. letters in alphabetical order
     for (let key of keys) {

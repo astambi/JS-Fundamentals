@@ -2,13 +2,12 @@ function usernames(arr) {
     let usernames = new Set();
     for (let username of arr)
         usernames.add(username);
-    console.log([...usernames].sort(sortByLengthAlpha)
-                .join('\n'));
+    console.log([...usernames].sort(sortByLengthAlpha).join('\n'));
 
     function sortByLengthAlpha(a, b) {
-        if (a.length < b.length)    return -1;  // 1. by length
-        if (a.length > b.length)    return 1;
-        return a.localeCompare(b);              // 2. then alphabetically
+        if (a.length != b.length)
+            return a.length - b.length; // ASC length
+        return a.localeCompare(b);      // alphabetically
     }
 }
 

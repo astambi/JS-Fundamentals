@@ -9,24 +9,22 @@ function systemComponents(arr) {
         systemComponents.get(system).get(component).add(subcomponent);
     }
     // sort systems
-    let systems = [...systemComponents.keys()];
-    systems.sort(function (a, b) {
+    let systemsSorted = [...systemComponents.keys()].sort(function (a, b) {
         let componentsA = [...systemComponents.get(a).keys()];
         let componentsB = [...systemComponents.get(b).keys()];
         if (componentsA.length != componentsB.length)
-            return componentsA.length < componentsB.length; // criteria 1. components count DESC
-        return a > b;                                       // criteria 2. alphabetically
+            return componentsB.length - componentsA.length; // DESC components count
+        return a.localeCompare(b);                          // alphabetically
     });
-    for (let system of systems) {
+    for (let system of systemsSorted) {
         console.log(system);
         // sort components
-        let components = [...systemComponents.get(system).keys()];
-        components.sort(function (a, b) {
+        let componentsSorted = [...systemComponents.get(system).keys()].sort(function (a, b) {
             let subcomponentsA = [...systemComponents.get(system).get(a)];
             let subcomponentsB = [...systemComponents.get(system).get(b)];
-            return subcomponentsA.length < subcomponentsB.length;   // criteria subcomponents count DESC
+            return subcomponentsB.length - subcomponentsA.length;  // DESC subcomponents count
         });
-        for (let component of components) {
+        for (let component of componentsSorted) {
             console.log(`|||${component}`);
             for (let subcomponent of systemComponents.get(system).get(component))
                 console.log(`||||||${subcomponent}`);
