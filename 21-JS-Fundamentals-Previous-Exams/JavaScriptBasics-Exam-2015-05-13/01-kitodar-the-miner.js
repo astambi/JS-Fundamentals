@@ -2,7 +2,9 @@ function kitodarTheMiner(input) {
     let quantities = {silver: 0, gold: 0, diamonds: 0};
     for (let line of input) {
         let validPattern = /^mine *.* *- *(gold|silver|diamonds) *: *(\d+)$/;
+        let validMatch = validPattern.exec(line); // [gold|silver|diamonds,quantity]
         if (validMatch)
+            quantities[validMatch[1]] += Number(validMatch[2]); // [type, quantity]
     }
     console.log(`*Silver: ${quantities.silver}`);
     console.log(`*Gold: ${quantities.gold}`);

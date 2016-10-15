@@ -5,6 +5,7 @@ function captainObvious([firstText, secondText]) {
 
     function checkForRepeatingWordsInText(repeatingWords, text) {
         if (repeatingWords.length == 0)			console.log('No words');
+        else if (repeatingWords.length < 2)		console.log('No sentences');
         else {
             let sentencePattern = /\b.+?[.?!]/g;
             let sentences = text.match(sentencePattern);
