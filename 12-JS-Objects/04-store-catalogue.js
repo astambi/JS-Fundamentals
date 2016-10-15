@@ -16,6 +16,29 @@ function storeCatalogue(arr) {
     }
 }
 
+// function storeCatalogue(input) {
+//     let catalogue = new Map(); // letter - product - price
+//     for (let line of input) {
+//         let [product, price] = line.split(/\s*:\s*/g);
+//         price = Number(price);
+//         let catalogueLetter = product[0];
+//         if (!catalogue.has(catalogueLetter))
+//             catalogue.set(catalogueLetter, new Map);
+//         catalogue.get(catalogueLetter).set(product, price);
+//     }
+//     catalogue = [...catalogue].sort(sortKeysAlphabetically);
+//     for (let [catalogueLetter, productPrice] of catalogue) {
+//         console.log(catalogueLetter);
+//         productPrice = [...productPrice].sort(sortKeysAlphabetically);
+//         for (let [product, price] of productPrice)
+//             console.log(`  ${product}: ${price}`);
+//     }
+//
+//     function sortKeysAlphabetically(a, b) {
+//         return a[0].toLowerCase().localeCompare(b[0].toLowerCase()); // key
+//     }
+// }
+
 storeCatalogue([
     'Appricot : 20.4',
     'Fridge : 1500',

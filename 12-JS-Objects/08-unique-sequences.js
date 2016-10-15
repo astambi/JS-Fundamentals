@@ -16,6 +16,25 @@ function uniqueSequences(arr) {
             console.log(seq);
 }
 
+// function uniqueSequences (input) {
+//     let uniqueSeqs = new Map();	// length - seqs
+//     for (let line of input) {
+//         let seq = JSON.parse(line).map(Number).sort((a, b) => b - a);
+//         let seqLen = seq.length;
+//         if (!uniqueSeqs.has(seqLen))
+//             uniqueSeqs.set(seqLen, new Set);
+//         uniqueSeqs.get(seqLen).add(seq.join(', '));
+//     }
+//     let lengths = [...uniqueSeqs].sort(sortBySeqLength);
+//     for (let [length, set] of lengths)
+//         for (let seq of set)
+//             console.log(`[${seq}]`);
+//
+//     function sortBySeqLength (a, b) {
+//         if (a[0] != b[0])	return a[0] - b[0];
+//     }
+// }
+
 // function uniqueSequences(arr) {
 //     let uniqueSeqs = new Set();
 //     for (let line of arr) {

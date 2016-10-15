@@ -32,6 +32,38 @@ function systemComponents(arr) {
     }
 }
 
+// function systemComponents (input) {
+//     let systemsRegister = new Map();	// system - component - subcomponent
+//     for (let line of input) {
+//         let [system, component, subcomponent] = line.split(/\s*\|\s*/g);
+//         if (!systemsRegister.has(system))
+//             systemsRegister.set(system, new Map);
+//         if (!systemsRegister.get(system).has(component))
+//             systemsRegister.get(system).set(component, new Set);
+//         systemsRegister.get(system).get(component).add(subcomponent);
+//     }
+//     let systems = [...systemsRegister].sort(sortSystems);
+//     for (let [system, components] of systems) {
+//         console.log(system);
+//         components = [...components].sort(sortComponents);
+//         for (let [component, subcomponents] of components) {
+//             console.log(`|||${component}`);
+//             subcomponents.forEach(subcomponent => console.log(`||||||${subcomponent}`));
+//         }
+//     }
+//
+//     function sortSystems(a, b) {
+//         if (a[1].size != b[1].size)
+//             return b[1].size - a[1].size; // DESC components count
+//         return a[0].toLowerCase().localeCompare(b[0].toLowerCase()); // ASC systemName alphabet, case-insensitive
+//     }
+//
+//     function sortComponents(a, b) {
+//         if (a[1].size != b[1].size)
+//             return b[1].size - a[1].size; // DESC components count
+//     }
+// }
+
 systemComponents([
     'SULS | Main Site | Home Page',
     'SULS | Main Site | Login Page',

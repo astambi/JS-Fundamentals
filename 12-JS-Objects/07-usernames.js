@@ -11,6 +11,19 @@ function usernames(arr) {
     }
 }
 
+// function usernames (input) {
+//     let usernames = new Set();
+//     input.forEach(username => usernames.add(username));
+//     [...usernames].sort(sortUsernames)
+//                   .forEach(username => console.log(username));
+//
+//     function sortUsernames(a, b) {
+//         if (a.length != b.length)
+//             return a.length - b.length;
+//         return a.localeCompare(b);
+//     }
+// }
+
 usernames([
     'Ashton',
     'Kutcher',
